@@ -1,0 +1,8 @@
+﻿{
+    "id": "morelargos",
+    "name": "More Largos",
+    "author": "Lionmeow",
+    "description": "Adds more largos (as the name suggests).",
+    "version": "1.0",
+    "load_after": [ "largolibrary" ]
+}

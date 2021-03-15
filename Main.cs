@@ -78,87 +78,39 @@ namespace MoreLargos
             {
                 if (field.Name.Contains("_PUDDLE_SLIME"))
                 {
-                    if (field.Name.Contains("RAD"))
+                    largoObjects.Add(new LargoObject
                     {
-                        largoObjects.Add(new LargoObject
-                        {
-                            sharedSlimeId = Identifiable.Id.PUDDLE_SLIME,
-                            baseSlimeId = Identifiable.Id.PINK_RAD_LARGO,
-                            largoId = (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), field.Name, true)
-                        });
-                    }
-                    else
-                    {
-                        largoObjects.Add(new LargoObject
-                        {
-                            sharedSlimeId = Identifiable.Id.PUDDLE_SLIME,
-                            baseSlimeId = (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), Enum.Parse(typeof(Identifiable.Id), field.Name, true).ToString().Replace("_PUDDLE", ""), true),
-                            largoId = (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), field.Name, true)
-                        });
-                    }
+                        sharedSlimeId = Identifiable.Id.PUDDLE_SLIME,
+                        baseSlimeId = (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), Enum.Parse(typeof(Identifiable.Id), field.Name, true).ToString().Replace("_PUDDLE", ""), true),
+                        largoId = (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), field.Name, true)
+                    });
                 }
                 else if (field.Name.Contains("_FIRE_SLIME"))
                 {
-                    if (field.Name.Contains("RAD"))
+                    largoObjects.Add(new LargoObject
                     {
-                        largoObjects.Add(new LargoObject
-                        {
-                            sharedSlimeId = Identifiable.Id.FIRE_SLIME,
-                            baseSlimeId = Identifiable.Id.PINK_RAD_LARGO,
-                            largoId = (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), field.Name, true)
-                        });
-                    }
-                    else
-                    {
-                        largoObjects.Add(new LargoObject
-                        {
-                            sharedSlimeId = Identifiable.Id.FIRE_SLIME,
-                            baseSlimeId = (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), Enum.Parse(typeof(Identifiable.Id), field.Name, true).ToString().Replace("_FIRE", ""), true),
-                            largoId = (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), field.Name, true)
-                        });
-                    }
+                        sharedSlimeId = Identifiable.Id.FIRE_SLIME,
+                        baseSlimeId = (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), Enum.Parse(typeof(Identifiable.Id), field.Name, true).ToString().Replace("_FIRE", ""), true),
+                        largoId = (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), field.Name, true)
+                    });
                 }
                 else if (field.Name.Contains("_GLITCH_SLIME"))
                 {
-                    if (field.Name.Contains("RAD"))
+                    largoObjects.Add(new LargoObject
                     {
-                        largoObjects.Add(new LargoObject
-                        {
-                            sharedSlimeId = Identifiable.Id.GLITCH_SLIME,
-                            baseSlimeId = Identifiable.Id.PINK_RAD_LARGO,
-                            largoId = (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), field.Name, true)
-                        });
-                    }
-                    else
-                    {
-                        largoObjects.Add(new LargoObject
-                        {
-                            sharedSlimeId = Identifiable.Id.GLITCH_SLIME,
-                            baseSlimeId = (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), Enum.Parse(typeof(Identifiable.Id), field.Name, true).ToString().Replace("_GLITCH", ""), true),
-                            largoId = (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), field.Name, true)
-                        });
-                    }
+                        sharedSlimeId = Identifiable.Id.GLITCH_SLIME,
+                        baseSlimeId = (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), Enum.Parse(typeof(Identifiable.Id), field.Name, true).ToString().Replace("_GLITCH", ""), true),
+                        largoId = (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), field.Name, true)
+                    });
                 }
                 else if (field.Name.Contains("_LUCKY_SLIME"))
                 {
-                    if (field.Name.Contains("RAD"))
+                    largoObjects.Add(new LargoObject
                     {
-                        largoObjects.Add(new LargoObject
-                        {
-                            sharedSlimeId = Identifiable.Id.LUCKY_SLIME,
-                            baseSlimeId = Identifiable.Id.PINK_RAD_LARGO,
-                            largoId = (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), field.Name, true)
-                        });
-                    }
-                    else
-                    {
-                        largoObjects.Add(new LargoObject
-                        {
-                            sharedSlimeId = Identifiable.Id.LUCKY_SLIME,
-                            baseSlimeId = (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), Enum.Parse(typeof(Identifiable.Id), field.Name, true).ToString().Replace("_LUCKY", ""), true),
-                            largoId = (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), field.Name, true)
-                        });
-                    }
+                        sharedSlimeId = Identifiable.Id.LUCKY_SLIME,
+                        baseSlimeId = (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), Enum.Parse(typeof(Identifiable.Id), field.Name, true).ToString().Replace("_LUCKY", ""), true),
+                        largoId = (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), field.Name, true)
+                    });
                 }
 
             }

@@ -152,5 +152,37 @@ namespace MoreLargos
         public static readonly Identifiable.Id QUICKSILVER_LUCKY_SLIME;
 
         public static readonly Identifiable.Id GOLD_LUCKY_SLIME;
+
+        public static readonly Identifiable.Id PINK_GOLD_SLIME;
+
+        public static readonly Identifiable.Id ROCK_GOLD_SLIME;
+
+        public static readonly Identifiable.Id TABBY_GOLD_SLIME;
+
+        public static readonly Identifiable.Id HONEY_GOLD_SLIME;
+
+        public static readonly Identifiable.Id PHOSPHOR_GOLD_SLIME;
+
+        public static readonly Identifiable.Id HUNTER_GOLD_SLIME;
+
+        public static readonly Identifiable.Id QUANTUM_GOLD_SLIME;
+
+        public static readonly Identifiable.Id DERVISH_GOLD_SLIME;
+
+        public static readonly Identifiable.Id TANGLE_GOLD_SLIME;
+
+        public static readonly Identifiable.Id SABER_GOLD_SLIME;
+
+        public static readonly Identifiable.Id RAD_GOLD_SLIME;
+
+        public static readonly Identifiable.Id BOOM_GOLD_SLIME;
+
+        public static readonly Identifiable.Id CRYSTAL_GOLD_SLIME;
+
+        public static readonly Identifiable.Id MOSAIC_GOLD_SLIME;
+
+        public static readonly Identifiable.Id QUICKSILVER_GOLD_SLIME;
+
+        //public static readonly Identifiable.Id GOLD_GOLD_SLIME;
     }
 }

@@ -22,6 +22,7 @@ namespace MoreLargos
         private static int bottomColorNameId = Shader.PropertyToID("_BottomColor");
         private static int middleColorNameId = Shader.PropertyToID("_MiddleColor");
         private static int topColorNameId = Shader.PropertyToID("_TopColor");
+        private static Version RequiredLLVersion = new Version(1, 3);
 
         public static SlimeAppearanceDirector mainMenuDirector;
         public static SlimeAppearanceDirector saveGameDirector;
@@ -38,6 +39,10 @@ namespace MoreLargos
             if (!SRModLoader.IsModPresent("largolibrary"))
             {
                 throw new Exception("Largo Library is not present, but is required!");
+            }
+            if (LargoLibrary.Main.Version == null || RequiredLLVersion > LargoLibrary.Main.Version)
+            {
+                throw new Exception("Largo Library version is under the required version! Required version: " + RequiredLLVersion.ToString());
             }
 
             SRSingleton<GameContext>.Instance.SlimeDefinitions.GetSlimeByIdentifiableId(Identifiable.Id.PUDDLE_SLIME).Diet.Produces = new Identifiable.Id[1]
@@ -112,6 +117,15 @@ namespace MoreLargos
                         largoId = (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), field.Name, true)
                     });
                 }
+                else if (field.Name.Contains("_GOLD_SLIME"))
+                {
+                    largoObjects.Add(new LargoObject
+                    {
+                        sharedSlimeId = Identifiable.Id.GOLD_SLIME,
+                        baseSlimeId = (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), Enum.Parse(typeof(Identifiable.Id), field.Name, true).ToString().Replace("_GOLD", ""), true),
+                        largoId = (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), field.Name, true)
+                    });
+                }
 
             }
 
@@ -132,7 +146,11 @@ namespace MoreLargos
                         break;
 
                     case Identifiable.Id.LUCKY_SLIME:
-                        CreateGlitchLargo(largoObject.sharedSlimeId, largoObject.baseSlimeId, largoObject.largoId);
+                        CreateLuckyLargo(largoObject.sharedSlimeId, largoObject.baseSlimeId, largoObject.largoId);
+                        break;
+
+                    case Identifiable.Id.GOLD_SLIME:
+                        CreateGoldLargo(largoObject.sharedSlimeId, largoObject.baseSlimeId, largoObject.largoId);
                         break;
                 };
             }
@@ -174,6 +192,20 @@ namespace MoreLargos
                             extraDrive = referenceEatMap.extraDrive
                         });
                     }
+                }
+
+                GameObject largoGameobject = SRSingleton<GameContext>.Instance.LookupDirector.GetPrefab(largoObject.largoId);
+                if (largoGameobject.GetComponent<LuckySlimeFlee>() != null)
+                {
+                    UnityEngine.Object.Destroy(largoGameobject.GetComponent<LuckySlimeFlee>());
+                }
+                if (largoGameobject.GetComponent<GoldSlimeFlee>() != null)
+                {
+                    UnityEngine.Object.Destroy(largoGameobject.GetComponent<GoldSlimeFlee>());
+                }
+                if (largoGameobject.GetComponent<GlitchSlimeFlee>() != null)
+                {
+                    UnityEngine.Object.Destroy(largoGameobject.GetComponent<GlitchSlimeFlee>());
                 }
             }
         }
@@ -242,7 +274,7 @@ namespace MoreLargos
 
         public static bool CreateGlitchLargo(Identifiable.Id slime1, Identifiable.Id slime2, Identifiable.Id largoId)
         {
-            bool result = LargoGenerator.CreateLargo(slime1, slime2, largoId);
+            bool result = LargoGenerator.CreateLargo(slime1, slime2, largoId, true);
 
             GameObject largoObject = SRSingleton<GameContext>.Instance.LookupDirector.GetPrefab(largoId);
             GameObject glitchObject = SRSingleton<GameContext>.Instance.LookupDirector.GetPrefab(Identifiable.Id.GLITCH_SLIME);
@@ -271,15 +303,28 @@ namespace MoreLargos
             }
             largoObject.AddComponent<SphereCollider>().GetCopyOf(glitchObject.GetComponent<SphereCollider>());
 
+            SlimeAppearance glitchLargoAppearance = SRSingleton<GameContext>.Instance.SlimeDefinitions.GetSlimeByIdentifiableId(largoId).AppearancesDefault[0];
+            SlimeAppearance slimeAppearance = SRSingleton<GameContext>.Instance.SlimeDefinitions.GetSlimeByIdentifiableId(slime2).AppearancesDefault[0];
+
             return result;
         }
 
         public static bool CreateLuckyLargo(Identifiable.Id slime1, Identifiable.Id slime2, Identifiable.Id largoId)
         {
             bool result = LargoGenerator.CreateLargo(slime1, slime2, largoId);
+            SlimeAppearance luckyLargoAppearance = SRSingleton<GameContext>.Instance.SlimeDefinitions.GetSlimeByIdentifiableId(largoId).AppearancesDefault[0];
+            SlimeAppearance luckyAppearance = SRSingleton<GameContext>.Instance.SlimeDefinitions.GetSlimeByIdentifiableId(Identifiable.Id.LUCKY_SLIME).AppearancesDefault[0];
+            luckyLargoAppearance.Structures[2] = luckyAppearance.Structures[2];
 
-            GameObject largoObject = SRSingleton<GameContext>.Instance.LookupDirector.GetPrefab(largoId);
-            GameObject luckyObject = SRSingleton<GameContext>.Instance.LookupDirector.GetPrefab(Identifiable.Id.LUCKY_SLIME);
+            return result;
+        }
+
+        public static bool CreateGoldLargo(Identifiable.Id slime1, Identifiable.Id slime2, Identifiable.Id largoId)
+        {
+            bool result = LargoGenerator.CreateLargo(slime1, slime2, largoId, true);
+            SlimeAppearance goldLargoAppearance = SRSingleton<GameContext>.Instance.SlimeDefinitions.GetSlimeByIdentifiableId(largoId).AppearancesDefault[0];
+            SlimeAppearance goldAppearance = SRSingleton<GameContext>.Instance.SlimeDefinitions.GetSlimeByIdentifiableId(Identifiable.Id.GOLD_SLIME).AppearancesDefault[0];
+            goldLargoAppearance.Structures[0] = goldAppearance.Structures[0];
 
             return result;
         }
